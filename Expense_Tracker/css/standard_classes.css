@@ -1,0 +1,26 @@
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-col-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.show-container {
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.5);
+}

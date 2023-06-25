@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <!-- stylesheets-->
+        <link rel="stylesheet" href="css/overall_styling.css" />
+        <link rel="stylesheet" href="css/standard_classes.css" />
+
+        <!-- fontawesome -->
+        <script src="https://kit.fontawesome.com/00e8ed60ea.js" crossorigin="anonymous"></script>
+
+        <!-- fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;600;700&display=swap"
+            rel="stylesheet" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap"
+            rel="stylesheet" />
+
+        <title>Expenses Tracker</title>
+    </head>
+    <body>
+        <div class="main-container">
+            <div class="main-grid-item card">
+                <div class="card-header">
+                    <h1>My Card</h1>
+                    <div class="card-header-buttons">
+                        <button class="settings">
+                            <span>Settings</span>
+                        </button>
+                        <button class="view-all">
+                            <span>View All</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-balances">
+                    <div class="card-balance-container">
+                        <div class="balances-header">
+                            <span>Card balance</span>
+                        </div>
+                        <div class="balance-amount">
+                            <span class="total-balance-amount">$</span>
+                            <span class="total-balance-amount" id="total-card-balance"></span>
+                        </div>
+                    </div>
+                    <div class="card-income-expense-container">
+                        <div class="income-container">
+                            <div class="balances-header">
+                                <span>Income</span>
+                            </div>
+                            <div class="balance-amount">
+                                <span class="total-balance-amount">$</span>
+                                <span class="total-balance-amount" id="total-income-balance"></span>
+                            </div>
+                        </div>
+                        <div class="expense-container">
+                            <div class="balances-header">
+                                <span>Expense</span>
+                            </div>
+                            <div class="balance-amount">
+                                <span class="total-balance-amount">$</span>
+                                <span
+                                    class="total-balance-amount"
+                                    id="total-expense-balance"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-nav-buttons">
+                    <button class="card-nav-button" aria-label="view charts">
+                        <i class="fa-solid fa-chart-pie"></i>
+                    </button>
+                    <button class="card-nav-button" aria-label="share">
+                        <i class="fa-regular fa-paper-plane"></i>
+                    </button>
+                    <button
+                        class="card-nav-button"
+                        aria-label="delete all transactions"
+                        onclick="clearLocalStorage();">
+                        <i class="fa-regular fa-trash-can"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="main-grid-item income">
+                <div class="percentage-icon">
+                    <i class="fa-solid fa-arrow-trend-up"></i>
+                </div>
+                <div class="percentage-text">
+                    <span class="percentage-number" id="percentage-text-income"></span>
+                    <span class="percentage-text">Income</span>
+                </div>
+            </div>
+            <div class="main-grid-item expense">
+                <div class="percentage-icon second">
+                    <i class="fa-solid fa-arrow-trend-down"></i>
+                </div>
+                <div class="percentage-text">
+                    <span class="percentage-number" id="percentage-text-expense"></span>
+                    <span class="percentage-text">Expense</span>
+                </div>
+            </div>
+
+            <div class="main-grid-item sort">
+                <label for="sort-dropdown">Sort by:</label>
+                <select name="sort-value" id="sort-dropdown" onchange="filter();">
+                    <option disabled selected>Choose filter</option>
+                    <option value="expense">Expense</option>
+                    <option value="income">Income</option>
+                </select>
+            </div>
+
+            <div class="main-grid-item transactions">
+                <div class="transactions-header">
+                    <h2 class="transactions-transactions-header">Transactions</h2>
+                    <button id="add-transaction-btn">Add</button>
+                </div>
+                <div class="transactions-container"></div>
+            </div>
+        </div>
+
+        <div class="add-transaction-form">
+            <div class="form-body">
+                <h2 class="form-header">New Transaction</h2>
+                <div class="form-inputs">
+                    <input
+                        class="form-input"
+                        type="text"
+                        id="form-desc"
+                        value=""
+                        placeholder="Description..."
+                        required
+                        aria-label="transaction description" />
+                    <div class="form-amount">
+                        <input
+                            class="form-input"
+                            type="number"
+                            id="form-amount"
+                            placeholder="Amount..."
+                            required
+                            aria-label="transaction amount" />
+                        <div id="dollar-sign">$</div>
+                    </div>
+                    <input
+                        class="form-input"
+                        type="date"
+                        id="form-date"
+                        required
+                        aria-label="transaction-date" />
+                    <div class="radio-inputs">
+                        <div class="radio-income">
+                            <input
+                                class="radio-btn"
+                                name="form-radio"
+                                value="radio-income"
+                                type="radio"
+                                id="radio-income"
+                                checked />
+                            <label for="radio-income">Income</label>
+                        </div>
+                        <div class="radio-expense">
+                            <input
+                                class="radio-btn"
+                                name="form-radio"
+                                value="radio-expense"
+                                type="radio"
+                                id="radio-expense" />
+                            <label for="radio-expense">Expense</label>
+                        </div>
+                    </div>
+
+                    <div class="form-buttons">
+                        <button id="save-transaction">Save</button>
+                        <button id="cancel-transaction">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="scripts/add_transaction.js"></script>
+        <script src="scripts/render_localstorage.js"></script>
+        <script src="scripts/delete_transactions.js"></script>
+        <script src="scripts/filters.js"></script>
+    </body>
+</html>
