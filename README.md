@@ -5,6 +5,7 @@ This expense tracker is set up to track incoming and outgoing transactions. The 
 ### See the app working! 
 https://tomrochedev.github.io/small_projects/Expense_Tracker/index.html
 
+
 ## Password Authenticator
 This authenticator checks four requirements for a solid password. 
 
